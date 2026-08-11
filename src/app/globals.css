@@ -1,26 +1,698 @@
+/* ==========================================================================
+ * Sameer.AI Interface — Global Theme System
+ * --------------------------------------------------------------------------
+ * Every colour in the app resolves through a custom property declared here.
+ * Components must never hardcode a colour; that is what keeps the light
+ * theme a one-block change instead of a hunt through markup.
+ * ========================================================================== */
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* --------------------------------------------------------------------------
+ * HARD EDGES
+ * A console has no rounded corners. This single rule does more for the
+ * aesthetic than any amount of per-component styling.
+ * -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+.status-dot,
+.arc-ring,
+.arc-core,
+.arc-core-glow {
+  border-radius: 50% !important;
+}
+
+/* --------------------------------------------------------------------------
+ * THEME — exposed to Tailwind utilities (v4 reads @theme from CSS)
+ * -------------------------------------------------------------------------- */
+
+@theme {
+  --color-neon-pink: #ec4899;
+  --color-neon-coral: #fb923c;
+  --color-bg-dark: #050510;
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-pixel: var(--font-geist-pixel-square);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* --------------------------------------------------------------------------
+ * DARK THEME (default)
+ * -------------------------------------------------------------------------- */
+
+:root,
+:root[data-theme="dark"] {
+  --neon-pink: #ec4899;
+  --neon-coral: #fb923c;
+  --glass-border: rgba(236, 72, 153, 0.35);
+
+  /* backgrounds */
+  --bg-body: #050510;
+  --bg-grid-line: rgba(236, 72, 153, 0.04);
+  --bg-panel: rgba(15, 5, 15, 0.75);
+  --bg-panel-hover: rgba(236, 72, 153, 0.5);
+  --bg-surface: rgba(236, 72, 153, 0.05);
+  --bg-surface-hover: rgba(236, 72, 153, 0.09);
+  --bg-input: rgba(8, 8, 24, 0.6);
+  --bg-tab-active: rgba(236, 72, 153, 0.15);
+  --bg-bar-area: rgba(0, 0, 0, 0.2);
+
+  /* text */
+  --text-primary: #fce7f3;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-dim: #6b7280;
+  --text-accent: #ec4899;
+  --text-accent-soft: rgba(236, 72, 153, 0.7);
+  --text-heading: #fda4af;
+  --text-value: #f9a8d4;
+  --text-panel-title: #f472b6;
+  --text-status: #4ade80;
+  --text-warn: #facc15;
+  --text-danger: #fb7185;
+  --text-tab-active: #f9a8d4;
+  --text-tab-inactive: #6b7280;
+  --text-input: #fce7f3;
+  --text-input-placeholder: rgba(236, 72, 153, 0.35);
+
+  /* borders */
+  --border-accent: rgba(236, 72, 153, 0.25);
+  --border-subtle: rgba(236, 72, 153, 0.1);
+  --border-divider: rgba(236, 72, 153, 0.2);
+  --border-crosshair: rgba(236, 72, 153, 0.15);
+  --crosshair-via: rgba(236, 72, 153, 0.2);
+
+  /* header */
+  --header-bg: rgba(5, 5, 16, 0.9);
+  --gauge-track: #4a044e;
+  --gauge-fill: #f472b6;
+
+  /* overlays */
+  --scanline-color: rgba(236, 72, 153, 0.035);
+  --scanner-color: rgba(251, 146, 60, 0.08);
+
+  /* terminal */
+  --terminal-output: #c9d1d9;
+  --terminal-meta: #6e7681;
+  --terminal-user: #7ee787;
+  --terminal-prompt: #fb923c;
+
+  /* arc reactor */
+  --ring-5: rgba(236, 72, 153, 0.2);
+  --core-edge: #f472b6;
+  --core-inner: rgba(236, 72, 153, 0.25);
+
+  /* bars */
+  --bar-active: rgba(236, 72, 153, 0.7);
+  --bar-inactive: rgba(236, 72, 153, 0.1);
+
+  /* shimmer */
+  --shimmer-base: rgba(236, 72, 153, 0.45);
+  --shimmer-peak: rgba(255, 200, 230, 1);
+
+  /* matrix rain */
+  --matrix-text: rgba(236, 72, 153, 0.1);
+
+  /* scrollbar */
+  --scroll-thumb: rgba(236, 72, 153, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+ * LIGHT THEME — same interface, pink on near-white
+ * -------------------------------------------------------------------------- */
+
+:root[data-theme="light"] {
+  --neon-pink: #db2777;
+  --neon-coral: #ea580c;
+  --glass-border: rgba(219, 39, 119, 0.22);
+
+  --bg-body: #fafafa;
+  --bg-grid-line: rgba(219, 39, 119, 0.05);
+  --bg-panel: rgba(255, 255, 255, 0.85);
+  --bg-panel-hover: rgba(219, 39, 119, 0.4);
+  --bg-surface: rgba(219, 39, 119, 0.06);
+  --bg-surface-hover: rgba(219, 39, 119, 0.1);
+  --bg-input: rgba(255, 255, 255, 0.8);
+  --bg-tab-active: rgba(219, 39, 119, 0.1);
+  --bg-bar-area: rgba(219, 39, 119, 0.05);
+
+  --text-primary: #1f2937;
+  --text-secondary: #374151;
+  --text-muted: #6b7280;
+  --text-dim: #9ca3af;
+  --text-accent: #db2777;
+  --text-accent-soft: rgba(219, 39, 119, 0.65);
+  --text-heading: #be185d;
+  --text-value: #db2777;
+  --text-panel-title: #be185d;
+  --text-status: #059669;
+  --text-warn: #b45309;
+  --text-danger: #be123c;
+  --text-tab-active: #db2777;
+  --text-tab-inactive: #6b7280;
+  --text-input: #1f2937;
+  --text-input-placeholder: rgba(190, 24, 93, 0.4);
+
+  --border-accent: rgba(219, 39, 119, 0.22);
+  --border-subtle: rgba(219, 39, 119, 0.1);
+  --border-divider: rgba(219, 39, 119, 0.18);
+  --border-crosshair: rgba(219, 39, 119, 0.15);
+  --crosshair-via: rgba(219, 39, 119, 0.2);
+
+  --header-bg: rgba(250, 250, 250, 0.9);
+  --gauge-track: rgba(219, 39, 119, 0.15);
+  --gauge-fill: #db2777;
+
+  --scanline-color: rgba(219, 39, 119, 0.025);
+  --scanner-color: rgba(234, 88, 12, 0.05);
+
+  --terminal-output: #374151;
+  --terminal-meta: #9ca3af;
+  --terminal-user: #047857;
+  --terminal-prompt: #c2410c;
+
+  --ring-5: rgba(219, 39, 119, 0.15);
+  --core-edge: #db2777;
+  --core-inner: rgba(219, 39, 119, 0.15);
+
+  --bar-active: rgba(219, 39, 119, 0.7);
+  --bar-inactive: rgba(219, 39, 119, 0.12);
+
+  --shimmer-base: rgba(219, 39, 119, 0.5);
+  --shimmer-peak: rgba(131, 24, 67, 1);
+
+  --matrix-text: rgba(219, 39, 119, 0.09);
+
+  --scroll-thumb: rgba(219, 39, 119, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+ * BASE
+ * -------------------------------------------------------------------------- */
+
+body {
+  background-color: var(--bg-body);
+  background-image:
+    linear-gradient(var(--bg-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--neon-pink);
+  color: var(--bg-body);
+}
+
+:focus-visible {
+  outline: 1px solid var(--neon-pink);
+  outline-offset: 2px;
+}
+
+.font-tech {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+.font-pixel {
+  font-family: var(--font-geist-pixel-square), var(--font-geist-mono), monospace;
+}
+
+/* --------------------------------------------------------------------------
+ * THEME TOGGLE ICONS
+ * Swapped in CSS so the button needs no React state. Dark theme offers the
+ * sun (go light); light theme offers the moon.
+ * -------------------------------------------------------------------------- */
+
+.theme-icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-icon-moon {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+ * GLASS PANEL
+ * -------------------------------------------------------------------------- */
+
+.glass-panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: var(--bg-panel-hover);
+}
+
+/* --------------------------------------------------------------------------
+ * TECH BORDER — neon corner brackets
+ * Two pseudo-elements for the top corners, two child divs for the bottom.
+ * -------------------------------------------------------------------------- */
+
+.tech-border::before,
+.tech-border::after,
+.tech-border > .corner-bl,
+.tech-border > .corner-br {
+  content: "";
+  position: absolute;
+  box-sizing: content-box;
+  width: 12px;
+  height: 12px;
+  border: 2px solid transparent;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.tech-border::before {
+  top: -1px;
+  left: -1px;
+  border-top-color: var(--neon-pink);
+  border-left-color: var(--neon-pink);
+}
+
+.tech-border::after {
+  top: -1px;
+  right: -1px;
+  border-top-color: var(--neon-pink);
+  border-right-color: var(--neon-pink);
+}
+
+.tech-border > .corner-bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom-color: var(--neon-pink);
+  border-left-color: var(--neon-pink);
+}
+
+.tech-border > .corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-color: var(--neon-pink);
+  border-right-color: var(--neon-pink);
+}
+
+/* --------------------------------------------------------------------------
+ * CRT OVERLAYS
+ * -------------------------------------------------------------------------- */
+
+.scanline-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    var(--scanline-color) 51%
+  );
+  background-size: 100% 4px;
+  z-index: 50;
+}
+
+.scanner-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--scanner-color),
+    transparent
+  );
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+  z-index: 40;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(100vh);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* --------------------------------------------------------------------------
+ * NEON SHIMMER — sweeping light across text
+ * -------------------------------------------------------------------------- */
+
+.neon-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--shimmer-base) 0%,
+    var(--shimmer-base) 44%,
+    var(--shimmer-peak) 50%,
+    var(--shimmer-base) 56%,
+    var(--shimmer-base) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neon-sweep 6s ease-in-out infinite;
+}
+
+@keyframes neon-sweep {
+  0% {
+    background-position: -50% 0;
+  }
+  60% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: 150% 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * ARC REACTOR
+ * -------------------------------------------------------------------------- */
+
+/**
+ * Sized from the available height, not width. Driving it from width and then
+ * clamping with max-height makes aspect-ratio lose, and the rings render as
+ * ellipses in any container that is wider than it is tall.
+ */
+.arc-reactor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  aspect-ratio: 1;
+  width: auto;
+  max-width: 100%;
+  max-height: 420px;
+}
+
+/**
+ * Only the outer boundary ring remains — the portrait now fills the rest of
+ * the reactor, so any ring drawn inside its footprint would sit hidden
+ * behind it (the core is later in DOM order and fully opaque).
+ */
+.arc-ring {
+  position: absolute;
+  border: 1px solid var(--neon-pink);
+}
+
+.arc-ring-5 {
+  width: 96%;
+  height: 96%;
+  border: 1px dashed var(--ring-5);
+  animation: rotate-fwd 32s linear infinite;
+}
+
+/* While the RAG pipeline is working, the boundary ring spins up. */
+.arc-reactor[data-busy="true"] .arc-ring-5 {
+  animation-duration: 6s;
+}
+
+/**
+ * Portrait fills almost the entire reactor — only a thin margin is left so
+ * the outer boundary ring (.arc-ring-5) still reads as a rim around it. The
+ * image itself never rotates; only its glow pulses gently.
+ */
+.arc-core {
+  position: relative;
+  width: 92%;
+  height: 92%;
+  border: 1px solid var(--core-edge);
+  overflow: hidden;
+  box-shadow: 0 0 26px var(--core-inner);
+  animation: core-pulse 3s ease-in-out infinite;
+}
+
+.arc-core-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.arc-reactor[data-busy="true"] .arc-core {
+  animation-duration: 1s;
+}
+
+@keyframes rotate-fwd {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes core-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* --------------------------------------------------------------------------
+ * MATRIX RAIN — ambient resume text behind the reactor
+ *
+ * A justified block that fills the panel, with a radial mask punching a clean
+ * circular hole in the middle so the core reads against empty space. Masking
+ * beats floating a `shape-outside` spacer: it stays centred at any container
+ * size, where a float only reflows text that happens to sit beside it.
+ * -------------------------------------------------------------------------- */
+
+.matrix-rain {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: var(--matrix-text);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: justify;
+  word-break: break-word;
+  padding: 0.5rem;
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent 26%,
+    #000 44%
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    transparent 0,
+    transparent 26%,
+    #000 44%
+  );
+}
+
+/* --------------------------------------------------------------------------
+ * BAR CHART
+ * -------------------------------------------------------------------------- */
+
+.bar-track {
+  background: var(--bg-bar-area);
+}
+
+.bar-fill {
+  background: var(--bar-active);
+  transition: height 0.6s ease-out, width 0.6s ease-out;
+}
+
+@keyframes bar-enter {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+.bar-animate {
+  transform-origin: bottom;
+  animation: bar-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* --------------------------------------------------------------------------
+ * TERMINAL CARET
+ * -------------------------------------------------------------------------- */
+
+@keyframes caret-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  translate: 0 0.15em;
+  background: var(--terminal-prompt);
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+ * SCROLLBARS
+ * -------------------------------------------------------------------------- */
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) transparent;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+}
+
+/* --------------------------------------------------------------------------
+ * MARKDOWN — model output inside the terminal transcript
+ * -------------------------------------------------------------------------- */
+
+.md > :first-child {
+  margin-top: 0;
+}
+.md > :last-child {
+  margin-bottom: 0;
+}
+.md p {
+  margin: 0.4rem 0;
+}
+.md ul,
+.md ol {
+  margin: 0.4rem 0;
+  padding-left: 1.1rem;
+}
+.md ul {
+  list-style: none;
+}
+.md ul > li {
+  position: relative;
+}
+.md ul > li::before {
+  content: "-";
+  position: absolute;
+  left: -1.1rem;
+  color: var(--text-accent);
+}
+.md ol {
+  list-style: decimal;
+}
+.md li {
+  margin: 0.15rem 0;
+}
+.md strong {
+  color: var(--text-value);
+  font-weight: 600;
+}
+.md h1,
+.md h2,
+.md h3,
+.md h4 {
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 1em;
+  margin: 0.7rem 0 0.3rem;
+}
+.md a {
+  color: var(--text-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.md code {
+  font-family: var(--font-geist-mono), monospace;
+  background: var(--bg-surface);
+  color: var(--text-value);
+  padding: 0.08em 0.3em;
+  font-size: 0.9em;
+}
+.md pre {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  padding: 0.6rem;
+  overflow-x: auto;
+  margin: 0.4rem 0;
+}
+.md pre code {
+  background: none;
+  padding: 0;
+  color: var(--terminal-output);
+}
+.md hr {
+  border: none;
+  border-top: 1px solid var(--border-divider);
+  margin: 0.6rem 0;
+}
+
+/* --------------------------------------------------------------------------
+ * MOTION PREFERENCES
+ * The interface leans hard on animation, so this has to be comprehensive.
+ * -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scanner-bar {
+    display: none;
+  }
+
+  .neon-shimmer {
+    background: none;
+    -webkit-text-fill-color: var(--text-accent);
+    color: var(--text-accent);
+  }
 }
