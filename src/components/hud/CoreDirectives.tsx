@@ -56,6 +56,9 @@ export function CoreDirectives() {
             @sameerkumar1012
           </span>
           <div className="flex items-center gap-3">
+            <IconLink href={profile.resumeUrl} label="Download resume" download>
+              <path d="M8 0a.75.75 0 0 1 .75.75v7.19l2.1-2.1a.75.75 0 1 1 1.06 1.06l-3.38 3.38a.75.75 0 0 1-1.06 0L4.09 6.9a.75.75 0 1 1 1.06-1.06l2.1 2.1V.75A.75.75 0 0 1 8 0zM2 11.5a.75.75 0 0 1 .75.75v1.5c0 .14.11.25.25.25h10a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 13 15.5H3a1.75 1.75 0 0 1-1.75-1.75v-1.5A.75.75 0 0 1 2 11.5z" />
+            </IconLink>
             <IconLink href={profile.github} label="GitHub">
               <path d="M8 0C3.6 0 0 3.6 0 8c0 3.5 2.3 6.5 5.5 7.6.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.4.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.7 3.9.3.3.6.8.6 1.6v2.2c0 .2.1.5.6.4C13.7 14.5 16 11.5 16 8c0-4.4-3.6-8-8-8z" />
             </IconLink>
@@ -77,10 +80,12 @@ export function CoreDirectives() {
 function IconLink({
   href,
   label,
+  download,
   children,
 }: {
   href: string;
   label: string;
+  download?: boolean;
   children: React.ReactNode;
 }) {
   const external = href.startsWith("http");
@@ -89,6 +94,7 @@ function IconLink({
     <a
       href={href}
       aria-label={label}
+      {...(download ? { download: true } : {})}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
       className="text-[var(--text-dim)] hover:text-[var(--neon-pink)] transition-colors"
     >

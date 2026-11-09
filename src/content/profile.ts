@@ -15,6 +15,8 @@ export const profile = {
   phone: "+91 6204207664",
   github: "https://github.com/sameerkumar1012",
   linkedin: "https://www.linkedin.com/in/sameer-kumar1012/",
+  // Drop the latest PDF at public/resume.pdf (same filename) to update — no code change needed.
+  resumeUrl: "/resume.pdf",
 
   summary:
     "AI Customer Success Associate helping customers get real value from AI-powered products, with a technical background building the chatbots, pipelines and backend services behind them.",
