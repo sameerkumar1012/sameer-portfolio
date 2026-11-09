@@ -55,7 +55,7 @@ export function CoreDirectives() {
           <span className="font-tech text-[10px] text-[var(--text-dim)]">
             @sameerkumar1012
           </span>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <IconLink href={profile.resumeUrl} label="Download resume" download>
               <path d="M8 0a.75.75 0 0 1 .75.75v7.19l2.1-2.1a.75.75 0 1 1 1.06 1.06l-3.38 3.38a.75.75 0 0 1-1.06 0L4.09 6.9a.75.75 0 1 1 1.06-1.06l2.1 2.1V.75A.75.75 0 0 1 8 0zM2 11.5a.75.75 0 0 1 .75.75v1.5c0 .14.11.25.25.25h10a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 13 15.5H3a1.75 1.75 0 0 1-1.75-1.75v-1.5A.75.75 0 0 1 2 11.5z" />
             </IconLink>
@@ -96,9 +96,9 @@ function IconLink({
       aria-label={label}
       {...(download ? { download: true } : {})}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      className="text-[var(--text-dim)] hover:text-[var(--neon-pink)] transition-colors"
+      className="text-[var(--text-secondary)] hover:text-[var(--neon-pink)] transition-colors"
     >
-      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor">
+      <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
         {children}
       </svg>
     </a>
