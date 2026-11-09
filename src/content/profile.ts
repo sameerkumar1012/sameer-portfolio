@@ -8,7 +8,7 @@
 
 export const profile = {
   name: "Sameer Kumar",
-  title: "Backend & AI Engineer",
+  title: "AI Customer Success Associate",
   siteUrl: "https://sameerkumar.dev",
   location: "Bangalore, India",
   email: "sameerkumar1012@gmail.com",
@@ -17,10 +17,10 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/sameer-kumar1012/",
 
   summary:
-    "Backend & AI engineer building production-ready RAG systems, data pipelines and scalable services with Python, FastAPI and AWS.",
+    "AI Customer Success Associate helping customers get real value from AI-powered products, with a technical background building the chatbots, pipelines and backend services behind them.",
 
   intro:
-    "I build production-ready AI applications — retrieval-augmented generation systems, data engineering pipelines and scalable backend services. Most of my work lives at the point where an LLM meets real infrastructure: retrieval that has to be fast, prompts that have to be safe, and pipelines that have to keep running.",
+    "I help customers succeed with AI-powered products, backed by hands-on experience building the systems behind them — chatbots, data pipelines and backend services. That mix lets me translate between what a customer needs and what the product can actually do, whether that's unblocking an issue, explaining how a feature works, or flagging what to build next.",
 
   availability: [
     "Recent engineering graduate",
